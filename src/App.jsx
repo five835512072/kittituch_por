@@ -1,39 +1,243 @@
+const linkedInUrl =
+  "https://www.linkedin.com/in/kittituch-suwannasri-460b79217/";
+const experience = [
+  {
+    role: "Software Engineer",
+    company: "Ascend Group",
+    employment: "Full-time",
+    period: "Apr 2024 — Present",
+    location: "Bangkok City, Thailand",
+    skills: ["Spring Boot", "Robot Framework", "Karate", "Mountebank", "JMeter"],
+    current: true,
+  },
+  {
+    role: "Software Engineer",
+    company: "SCB — Siam Commercial Bank",
+    employment: "Full-time",
+    period: "Jun 2022 — Apr 2024",
+    location: "Bangkok City, Thailand",
+    skills: ["Spring Boot"],
+  },
+  {
+    role: "Software Programmer",
+    company: "Magic Box Solutions",
+    employment: "Full-time",
+    period: "Jan 2021 — Jun 2022",
+    location: "Bangkok City, Thailand",
+    skills: ["TypeScript", "Python"],
+  },
+  {
+    role: "Unity Developer",
+    company: "Thai Generation",
+    employment: "Full-time",
+    period: "Jan 2020 — Dec 2020",
+    location: "Bangkok, Bangkok City, Thailand · On-site",
+    skills: ["C#", "Unity"],
+  },
+];
+
+const skillGroups = [
+  {
+    label: "Ascend Group",
+    skills: ["Spring Boot", "Robot Framework", "Karate", "Mountebank", "JMeter"],
+  },
+  {
+    label: "Other listed skills",
+    skills: ["TypeScript", "Python", "C#", "Unity"],
+  },
+];
+
+function LinkedInLink({ children, className = "", ...props }) {
+  return (
+    <a
+      className={className}
+      href={linkedInUrl}
+      target="_blank"
+      rel="noreferrer"
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
+
 function App() {
   return (
-    <main className="page">
-      <nav className="navigation" aria-label="Main navigation">
-        <a className="wordmark" href="#home">
-          Your Name
+    <div className="resume-page">
+      <header className="site-header">
+        <a className="brand" href="#home" aria-label="Kittituch Suwannasri home">
+          <span className="brand-mark">KS</span>
+          <span>Kittituch Suwannasri</span>
         </a>
-        <a className="navigation-link" href="mailto:hello@example.com">
-          Get in touch <span aria-hidden="true">↗</span>
-        </a>
-      </nav>
+        <nav className="site-nav" aria-label="Main navigation">
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <LinkedInLink className="nav-cta">
+            LinkedIn <span aria-hidden="true">↗</span>
+          </LinkedInLink>
+        </nav>
+      </header>
 
-      <section className="hero" id="home" aria-labelledby="intro-title">
-        <p className="eyebrow">
-          <span className="status-dot" aria-hidden="true" />
-          Available for new opportunities
-        </p>
-        <h1 id="intro-title">
-          Thoughtful work,
-          <br />
-          made with <span>purpose.</span>
-        </h1>
-        <p className="intro">
-          Hi, I&apos;m Your Name — a designer and developer creating clear,
-          considered digital experiences.
-        </p>
-        <a className="primary-link" href="mailto:hello@example.com">
-          Let&apos;s work together <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+      <main id="home">
+        <section className="intro" aria-labelledby="intro-title">
+          <div className="intro-copy">
+            <p className="eyebrow">
+              <span className="eyebrow-line" />
+              Software Engineer <span className="eyebrow-divider">/</span>{" "}
+              Bangkok, Thailand
+            </p>
+            <h1 id="intro-title">
+              Kittituch
+              <br />
+              <span>Suwannasri.</span>
+            </h1>
+            <p className="intro-description">
+              Currently at Ascend Group. Previously at SCB, Magic Box Solutions,
+              and Thai Generation.
+            </p>
+            <div className="intro-actions">
+              <LinkedInLink className="button button-primary">
+                View LinkedIn profile <span aria-hidden="true">↗</span>
+              </LinkedInLink>
+            </div>
+          </div>
 
-      <footer className="footer">
-        <span>Independent designer &amp; developer</span>
-        <span>© {new Date().getFullYear()} Your Name</span>
+          <aside className="profile-card" aria-label="Profile snapshot">
+            <div className="profile-card-top">
+              <span className="profile-label">PROFILE SNAPSHOT</span>
+              <span className="profile-index">BKK · TH</span>
+            </div>
+            <div className="portrait" aria-hidden="true">
+              <span>KS</span>
+              <span className="portrait-orbit portrait-orbit-one" />
+              <span className="portrait-orbit portrait-orbit-two" />
+            </div>
+            <div className="profile-card-bottom">
+              <div>
+                <h2>Software Engineer</h2>
+                <p>Ascend Group · Full-time</p>
+              </div>
+              <LinkedInLink
+                className="round-link"
+                aria-label="Open LinkedIn profile"
+              >
+                ↗
+              </LinkedInLink>
+            </div>
+          </aside>
+        </section>
+
+        <section
+          className="content-section"
+          id="experience"
+          aria-labelledby="experience-title"
+        >
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">
+                <span className="eyebrow-line" />
+                Career timeline
+              </p>
+              <h2 id="experience-title">Experience</h2>
+            </div>
+            <span className="section-count">2020 — NOW</span>
+          </div>
+
+          <div className="experience-list">
+            {experience.map((job, index) => (
+              <article className="experience-item" key={job.company}>
+                <div className="experience-meta">
+                  <span>{job.period}</span>
+                  {job.current && <span className="current-label">Current</span>}
+                </div>
+                <div className="experience-details">
+                  <div className="experience-title-row">
+                    <div>
+                      <h3>{job.role}</h3>
+                      <p className="experience-company">
+                        {job.company} <span>·</span> {job.employment}
+                      </p>
+                    </div>
+                    <span className="experience-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="experience-location">{job.location}</p>
+                  <ul className="skill-list" aria-label={`${job.role} skills`}>
+                    {job.skills.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div className="details-grid">
+          <section
+            className="content-section education-section"
+            id="education"
+            aria-labelledby="education-title"
+          >
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">
+                  <span className="eyebrow-line" />
+                  Education
+                </p>
+                <h2 id="education-title">Academic background</h2>
+              </div>
+            </div>
+            <article className="education-card">
+              <span className="education-mark" aria-hidden="true">
+                PSU
+              </span>
+              <div>
+                <h3>Prince of Songkla University</h3>
+                <p>University</p>
+              </div>
+            </article>
+          </section>
+
+          <section
+            className="content-section skills-section"
+            id="skills"
+            aria-labelledby="skills-title"
+          >
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">
+                  <span className="eyebrow-line" />
+                  Toolkit
+                </p>
+                <h2 id="skills-title">Skills</h2>
+              </div>
+            </div>
+            <div className="skill-groups">
+              {skillGroups.map((group) => (
+                <div className="skill-group" key={group.label}>
+                  <h3>{group.label}</h3>
+                  <ul className="skill-list">
+                    {group.skills.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer className="site-footer">
+        <span>© {new Date().getFullYear()} Kittituch Suwannasri</span>
+        <LinkedInLink className="footer-link">
+          Connect on LinkedIn <span aria-hidden="true">↗</span>
+        </LinkedInLink>
       </footer>
-    </main>
+    </div>
   );
 }
 
