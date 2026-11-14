@@ -66,7 +66,11 @@ function App() {
     <div className="resume-page">
       <header className="site-header">
         <a className="brand" href="#home" aria-label="Kittituch Suwannasri home">
-          <span className="brand-mark">KS</span>
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false" fill="none">
+              <path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 5l-4 14" />
+            </svg>
+          </span>
           <span>Kittituch Suwannasri</span>
         </a>
         <nav className="site-nav" aria-label="Main navigation">
