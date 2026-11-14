@@ -45,9 +45,34 @@
 
   const style = document.createElement("style");
   style.textContent = `
-    .skill-chip-link { display: block; color: inherit; text-decoration: none; }
-    .skill-chip-link:hover { color: #6a8c36; }
-    .skill-chip-link:focus-visible { outline: 3px solid #a7cf4d; outline-offset: 3px; }
+    .skill-list li {
+      overflow: hidden;
+      padding: 0;
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+    .skill-chip-link {
+      display: block;
+      padding: 5px 8px;
+      color: inherit;
+      text-decoration: none;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+    .skill-list li:hover {
+      transform: translateY(-2px);
+      border-color: #9ab75c;
+      box-shadow: 0 4px 12px rgb(23 36 29 / 12%);
+    }
+    .skill-chip-link:hover {
+      background-color: #e8efd9;
+      color: #435d2d;
+    }
+    .skill-chip-link:focus-visible {
+      outline: 3px solid #a7cf4d;
+      outline-offset: -3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .skill-list li, .skill-chip-link { transition: none; }
+    }
   `;
   document.head.append(style);
 
