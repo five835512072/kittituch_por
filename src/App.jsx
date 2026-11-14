@@ -61,11 +61,104 @@ function LinkedInLink({ children, className = "", ...props }) {
   );
 }
 
+const skillHeadings = [
+  "Robot Framework",
+  "Karate",
+  "Mountebank",
+  "JMeter",
+  "TypeScript",
+  "Python",
+  "C#",
+  "Unity",
+];
+
+function SkillsPage() {
+  return (
+    <main className="skills-page">
+      <div className="section-heading skills-page-heading">
+        <div>
+          <p className="eyebrow">
+            <span className="eyebrow-line" />
+            Toolkit
+          </p>
+          <h1 id="skills-page-title">Skills</h1>
+        </div>
+      </div>
+
+      <div className="skill-details">
+        <section className="skill-detail" aria-labelledby="java-spring-boot-title">
+          <h2 id="java-spring-boot-title">Java / Spring Boot</h2>
+          <p>
+            Experience contributing to the development of microservices and
+            batch jobs using Java and Spring Boot in systems that integrate
+            with multiple databases and services. Worked on assigned tasks and
+            consulted with the team when handling more complex areas.
+          </p>
+          <ul className="skill-detail-list">
+            <li>
+              Used REST Client and RestTemplate to call internal and external
+              services, configuring rate limits, circuit breakers, and timeouts
+              to manage requests and handle downstream service failures.
+            </li>
+            <li>
+              Integrated with Oracle SQL and MySQL, including writing queries
+              and performing basic data checks.
+            </li>
+            <li>Used Kafka and RabbitMQ for messaging between services.</li>
+            <li>Used OpenSearch for searching and inspecting data.</li>
+            <li>
+              Used Redis Cache to store frequently accessed data and reduce
+              database reads.
+            </li>
+            <li>Integrated with S3 for file storage and retrieval.</li>
+            <li>
+              Used Persistent Volumes to store data that needs to persist while
+              applications are running.
+            </li>
+            <li>
+              Helped investigate issues using logs and tested functionality in
+              collaboration with the team.
+            </li>
+          </ul>
+          <p>
+            Currently developing further skills in microservice design and
+            resolving complex issues. Familiar with following existing system
+            patterns, working on tasks incrementally, and learning through code
+            reviews and collaboration with the team.
+          </p>
+        </section>
+
+        {skillHeadings.map((skill) => (
+          <section
+            className="skill-detail"
+            aria-label={`${skill} skills`}
+            key={skill}
+          >
+            <h2>{skill}</h2>
+          </section>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+const basePath = new URL(import.meta.env.BASE_URL, window.location.origin)
+  .pathname.replace(/\/+$/, "");
+const homeHref = `${basePath}/`;
+const skillsHref = `${basePath}/skills`;
+
 function App() {
+  const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isSkillsPage = currentPath === skillsHref;
+
   return (
     <div className="resume-page">
       <header className="site-header">
-        <a className="brand" href="#home" aria-label="Kittituch Suwannasri home">
+        <a
+          className="brand"
+          href={`${homeHref}#home`}
+          aria-label="Kittituch Suwannasri home"
+        >
           <span className="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false">
               <g
@@ -83,15 +176,20 @@ function App() {
           <span>Kittituch Suwannasri</span>
         </a>
         <nav className="site-nav" aria-label="Main navigation">
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
+          <a href={`${homeHref}#experience`}>Experience</a>
+          <a href={`${homeHref}#education`}>Education</a>
+          <a href={skillsHref} aria-current={isSkillsPage ? "page" : undefined}>
+            Skills
+          </a>
           <LinkedInLink className="nav-cta">
             LinkedIn <span aria-hidden="true">↗</span>
           </LinkedInLink>
         </nav>
       </header>
 
+      {isSkillsPage ? (
+        <SkillsPage />
+      ) : (
       <main id="home">
         <section className="intro" aria-labelledby="intro-title">
           <div className="intro-copy">
@@ -121,10 +219,11 @@ function App() {
               <span className="profile-label">PROFILE SNAPSHOT</span>
               <span className="profile-index">BKK · TH</span>
             </div>
-            <div className="portrait" aria-hidden="true">
-              <span>KS</span>
-              <span className="portrait-orbit portrait-orbit-one" />
-              <span className="portrait-orbit portrait-orbit-two" />
+            <div className="portrait">
+              <img
+                src={`${basePath}/profile.jpg`}
+                alt="Kittituch Suwannasri"
+              />
             </div>
             <div className="profile-card-bottom">
               <div>
@@ -243,6 +342,7 @@ function App() {
           </section>
         </div>
       </main>
+      )}
 
       <footer className="site-footer">
         <span>© {new Date().getFullYear()} Kittituch Suwannasri</span>
