@@ -1,5 +1,8 @@
 (() => {
   const skillsPath = "/skills";
+  const psuEmblemUrl =
+    "https://upload.wikimedia.org/wikipedia/commons/3/3c/Prince_of_Songkla_University_Emblem.svg";
+
   const slugify = (value) =>
     value
       .toLowerCase()
@@ -12,6 +15,19 @@
       return "java-spring-boot";
     }
     return slugify(skill);
+  };
+
+  const addPsuLogo = () => {
+    const mark = document.querySelector(".education-mark");
+    if (!mark || mark.querySelector("img")) return;
+
+    const logo = document.createElement("img");
+    logo.src = psuEmblemUrl;
+    logo.alt = "Prince of Songkla University emblem";
+    logo.loading = "lazy";
+    logo.decoding = "async";
+    mark.replaceChildren(logo);
+    mark.setAttribute("aria-hidden", "false");
   };
 
   const addSkillLinks = () => {
@@ -70,13 +86,24 @@
       outline: 3px solid #a7cf4d;
       outline-offset: -3px;
     }
+    .education-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
     @media (prefers-reduced-motion: reduce) {
       .skill-list li, .skill-chip-link { transition: none; }
     }
   `;
   document.head.append(style);
 
-  const observer = new MutationObserver(addSkillLinks);
+  const updatePage = () => {
+    addSkillLinks();
+    addPsuLogo();
+  };
+
+  const observer = new MutationObserver(updatePage);
   observer.observe(document.documentElement, { childList: true, subtree: true });
-  addSkillLinks();
+  updatePage();
 })();
