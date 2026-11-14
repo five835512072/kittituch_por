@@ -1,7 +1,6 @@
 (() => {
   const skillsPath = "/skills";
-  const psuEmblemUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/3/3c/Prince_of_Songkla_University_Emblem.svg";
+  const psuEmblemUrl = "https://www.psu.ac.th/img/introduce/introduce3/psu_logo_01.png";
 
   const slugify = (value) =>
     value
@@ -23,7 +22,7 @@
 
     const logo = document.createElement("img");
     logo.src = psuEmblemUrl;
-    logo.alt = "Prince of Songkla University emblem";
+    logo.alt = "Prince of Songkla University logo";
     logo.loading = "lazy";
     logo.decoding = "async";
     mark.replaceChildren(logo);
