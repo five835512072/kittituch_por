@@ -101,8 +101,8 @@ function SkillsPage() {
               to manage requests and handle downstream service failures.
             </li>
             <li>
-              Integrated with Oracle SQL and MySQL, including writing queries
-              and performing basic data checks.
+              Connected to Oracle and MySQL databases using JDBC and used JPA
+              to write queries.
             </li>
             <li>Used Kafka and RabbitMQ for messaging between services.</li>
             <li>Used OpenSearch for searching and inspecting data.</li>
@@ -110,14 +110,19 @@ function SkillsPage() {
               Used Redis Cache to store frequently accessed data and reduce
               database reads.
             </li>
-            <li>Integrated with S3 for file storage and retrieval.</li>
             <li>
-              Used Persistent Volumes to store data that needs to persist while
-              applications are running.
+              Integrated with S3 and developed services to list, retrieve,
+              upload, and delete files.
             </li>
             <li>
-              Helped investigate issues using logs and tested functionality in
-              collaboration with the team.
+              Used Persistent Volumes to retain data while applications are
+              running, and with batch applications to check execution status and
+              monitor two batch jobs running concurrently.
+            </li>
+            <li>
+              Helped investigate issues by reviewing logs in OpenSearch and
+              Loki, checking service status in Grafana, and testing functionality
+              with the team.
             </li>
           </ul>
           <p>
@@ -135,6 +140,39 @@ function SkillsPage() {
             key={skill}
           >
             <h2>{skill}</h2>
+            {skill === "Robot Framework" && (
+              <p>
+                Developed Robot Framework test suites to automate API testing
+                across services. Validated response status codes and payloads,
+                along with related data in databases, Redis, RabbitMQ, Kafka,
+                and S3. Scheduled daily test runs to verify that each service is
+                functioning as expected.
+              </p>
+            )}
+            {skill === "Karate" && (
+              <p>
+                Wrote and ran API tests with Karate, checking status codes,
+                response bodies, and expected endpoint behavior. Also used
+                Karate to mock APIs for performance testing and configured
+                proxies to route requests to live downstream services.
+              </p>
+            )}
+            {skill === "Mountebank" && (
+              <p>
+                Created simple stubs for dependent services to return
+                predictable responses, making it easier to test APIs without
+                relying on live downstream services.
+              </p>
+            )}
+            {skill === "JMeter" && (
+              <p>
+                Used JMeter to evaluate service performance under different
+                workloads. Ran step-load tests to observe behavior as traffic
+                increased, maximum-capacity tests to identify service limits,
+                and baseline tests to establish performance benchmarks. Also
+                ran daily performance tests to detect potential degradation.
+              </p>
+            )}
           </section>
         ))}
       </div>
@@ -207,11 +245,6 @@ function App() {
               Currently at Ascend Group. Previously at SCB, Magic Box Solutions,
               and Thai Generation.
             </p>
-            <div className="intro-actions">
-              <LinkedInLink className="button button-primary">
-                View LinkedIn profile <span aria-hidden="true">↗</span>
-              </LinkedInLink>
-            </div>
           </div>
 
           <aside className="profile-card" aria-label="Profile snapshot">
